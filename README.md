@@ -1,97 +1,156 @@
-# vinext-starter
+# Jaewoong Emotion Store
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+감정을 기록하고, 날짜별·유형별로 돌아볼 수 있도록 만든 개인용 감정 기록 웹 애플리케이션입니다.
 
-## Prerequisites
+이 프로젝트는 OpenAI Codex를 활용한 AI-assisted coding 방식으로 제작했습니다.
 
-- Node.js `>=22.13.0`
+저는 원하는 감정 분류 방식, 기록 흐름, 화면 구성, 주간 통계, 필터 기능 등을 자연어로 설명하고, 생성된 결과물을 직접 실행하면서 문제점을 확인하고 반복적으로 수정 방향을 제시했습니다.
 
-## Quick Start
+## 주요 기능
+
+- 감정 유형 선택
+- 감정의 선명도 기록
+- 자유로운 생각 메모
+- 날짜별 감정 기록
+- 주간 감정 기록 확인
+- 자주 선택한 감정 확인
+- 평균 선명도 표시
+- 감정 유형별 필터링
+- 키워드 및 태그 기반 기록 분류
+- 과거 기록 확인
+
+## 프로젝트를 만든 이유
+
+감정을 단순히 일기 형식으로 적는 것보다, 그날의 상태를 일정한 기준으로 기록하고 나중에 흐름을 돌아볼 수 있는 도구를 만들고 싶었습니다.
+
+기본적인 사용 흐름은 다음과 같습니다.
+
+```text
+감정 선택
+↓
+선명도 기록
+↓
+생각 메모
+↓
+기록 저장
+↓
+주간 흐름 확인
+↓
+감정 및 키워드별 과거 기록 탐색
+```
+
+## 감정 분류
+
+현재 다음과 같은 감정 범주를 중심으로 기록할 수 있도록 구성했습니다.
+
+- 평온
+- 활력
+- 침잠
+- 긴장
+- 사색
+- 기타
+
+각 범주 안에서 보다 구체적인 상태를 선택하거나 직접 내용을 입력할 수 있도록 구성했습니다.
+
+## 사용 기술
+
+프로젝트에는 다음과 같은 기술이 포함되어 있습니다.
+
+- Next.js
+- React
+- TypeScript
+- HTML / CSS
+- Cloudflare Workers / Wrangler
+- Drizzle ORM
+
+코드를 처음부터 직접 작성한 프로젝트는 아니며, Codex가 생성한 코드를 기반으로 기능을 테스트하고 수정하면서 프로젝트를 발전시켰습니다.
+
+## 개발 방식
+
+이 프로젝트는 자연어 기반 AI-assisted development 방식으로 진행했습니다.
+
+제가 주로 담당한 부분은 다음과 같습니다.
+
+- 앱의 목적과 기능 정의
+- 감정 분류 방식 결정
+- 화면 배치 및 사용자 흐름 결정
+- 자연어를 이용한 기능 추가 요청
+- 실제 기능 실행 및 테스트
+- UI와 동작의 문제점 확인
+- 원하는 결과와 다른 부분 수정 요청
+- 반복적인 기능 개선
+
+이 과정을 통해 아이디어를 구체적인 요구사항으로 바꾸고, AI 도구를 활용해 작동하는 애플리케이션으로 발전시키는 경험을 했습니다.
+
+## 프로젝트 구조
+
+주요 파일과 폴더는 다음과 같습니다.
+
+```text
+app/
+├── page.tsx
+├── layout.tsx
+└── globals.css
+
+db/
+drizzle/
+public/
+worker/
+
+package.json
+next.config.ts
+vite.config.ts
+tsconfig.json
+```
+
+## 실행 방법
+
+필요한 패키지를 설치합니다.
 
 ```bash
 npm install
+```
+
+개발 서버를 실행합니다.
+
+```bash
 npm run dev
-npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+프로젝트 환경에 따라 추가 설정이 필요할 수 있습니다.
 
-## Included Shape
+## Git 관리
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+GitHub에 올릴 필요가 없는 파일은 `.gitignore`를 통해 제외했습니다.
 
-## Workspace Auth Headers
+예:
 
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```text
+node_modules/
+dist/
+.wrangler/
+build/
+*.log
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+## 배운 점
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+이 프로젝트를 진행하면서 다음과 같은 경험을 했습니다.
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+- AI 코딩 도구를 이용한 웹 애플리케이션 제작
+- 사용자 요구사항을 자연어로 구체화하는 과정
+- 기능을 직접 실행하고 반복적으로 검증하는 과정
+- 웹 프로젝트의 기본적인 파일 구조 확인
+- npm 기반 패키지 관리
+- Git과 GitHub를 이용한 프로젝트 관리
+- 반복적인 테스트를 통한 UI 및 기능 개선
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+## 현재 한계
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+이 프로젝트의 코드를 처음부터 직접 작성한 것은 아닙니다.
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+현재는 AI 도구를 활용해 원하는 기능을 구현하고 테스트하는 경험을 쌓는 단계이며, 앞으로 Linux와 프로그래밍에 대한 이해를 넓혀 프로젝트 내부 동작을 직접 이해할 수 있는 수준으로 발전하는 것을 목표로 하고 있습니다.
 
-## Useful Commands
+## 프로젝트 목표
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+이 프로젝트의 목표는 감정 기록이라는 개인적인 아이디어를 실제로 사용할 수 있는 애플리케이션 형태로 구현해보고, AI-assisted development를 통해 아이디어를 반복적으로 구체화하고 개선하는 경험을 쌓는 것이었습니다.
