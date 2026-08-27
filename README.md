@@ -1,90 +1,92 @@
 # Jaewoong Emotion Store
 
-감정을 기록하고, 날짜별·유형별로 돌아볼 수 있도록 만든 개인용 감정 기록 웹 애플리케이션입니다.
+An AI-assisted web application for recording emotions, organizing personal thoughts, and reviewing emotional patterns over time.
 
-이 프로젝트는 OpenAI Codex를 활용한 AI-assisted coding 방식으로 제작했습니다.
+This project was developed using OpenAI Codex. I defined the emotion categories, recording workflow, screen layout, filtering options, and desired user experience through natural-language instructions, then tested and refined the generated application iteratively.
 
-저는 원하는 감정 분류 방식, 기록 흐름, 화면 구성, 주간 통계, 필터 기능 등을 자연어로 설명하고, 생성된 결과물을 직접 실행하면서 문제점을 확인하고 반복적으로 수정 방향을 제시했습니다.
+## Features
 
-## 주요 기능
+- Select an emotion category
+- Record the intensity or clarity of an emotion
+- Write a personal note about the current state
+- Save emotion records by date
+- Review weekly emotion patterns
+- View frequently selected emotions
+- Display average emotion intensity
+- Filter records by emotion category
+- Organize records using keywords and tags
+- Browse previous entries
 
-- 감정 유형 선택
-- 감정의 선명도 기록
-- 자유로운 생각 메모
-- 날짜별 감정 기록
-- 주간 감정 기록 확인
-- 자주 선택한 감정 확인
-- 평균 선명도 표시
-- 감정 유형별 필터링
-- 키워드 및 태그 기반 기록 분류
-- 과거 기록 확인
+## Motivation
 
-## 프로젝트를 만든 이유
+I wanted to create a more structured alternative to a traditional free-form diary.
 
-감정을 단순히 일기 형식으로 적는 것보다, 그날의 상태를 일정한 기준으로 기록하고 나중에 흐름을 돌아볼 수 있는 도구를 만들고 싶었습니다.
+Rather than recording only a long paragraph, the application organizes each entry using an emotion category, intensity level, written note, date, and optional keywords.
 
-기본적인 사용 흐름은 다음과 같습니다.
+The basic workflow is:
 
 ```text
-감정 선택
-↓
-선명도 기록
-↓
-생각 메모
-↓
-기록 저장
-↓
-주간 흐름 확인
-↓
-감정 및 키워드별 과거 기록 탐색
+Select an emotion
+        ↓
+Record its intensity
+        ↓
+Write a personal note
+        ↓
+Save the entry
+        ↓
+Review weekly patterns
+        ↓
+Search or filter previous records
 ```
 
-## 감정 분류
+## Emotion Categories
 
-현재 다음과 같은 감정 범주를 중심으로 기록할 수 있도록 구성했습니다.
+The application is organized around categories such as:
 
-- 평온
-- 활력
-- 침잠
-- 긴장
-- 사색
-- 기타
+- Calm
+- Energetic
+- Low
+- Anxious
+- Reflective
+- Other
 
-각 범주 안에서 보다 구체적인 상태를 선택하거나 직접 내용을 입력할 수 있도록 구성했습니다.
+Users can select a category and add more detailed information through notes and keywords.
 
-## 사용 기술
+## Tech Stack
 
-프로젝트에는 다음과 같은 기술이 포함되어 있습니다.
+The project includes the following technologies:
 
 - Next.js
 - React
 - TypeScript
-- HTML / CSS
-- Cloudflare Workers / Wrangler
+- Cloudflare Workers
+- Wrangler
 - Drizzle ORM
+- HTML and CSS
 
-코드를 처음부터 직접 작성한 프로젝트는 아니며, Codex가 생성한 코드를 기반으로 기능을 테스트하고 수정하면서 프로젝트를 발전시켰습니다.
+## Development Approach
 
-## 개발 방식
+This project was created through AI-assisted development.
 
-이 프로젝트는 자연어 기반 AI-assisted development 방식으로 진행했습니다.
+Most of the application code was generated and revised with the help of OpenAI Codex. I did not write the entire codebase from scratch.
 
-제가 주로 담당한 부분은 다음과 같습니다.
+My role focused on:
 
-- 앱의 목적과 기능 정의
-- 감정 분류 방식 결정
-- 화면 배치 및 사용자 흐름 결정
-- 자연어를 이용한 기능 추가 요청
-- 실제 기능 실행 및 테스트
-- UI와 동작의 문제점 확인
-- 원하는 결과와 다른 부분 수정 요청
-- 반복적인 기능 개선
+- Defining the purpose of the application
+- Deciding how emotions should be categorized
+- Planning the recording workflow
+- Determining the screen layout and interactions
+- Describing requested features in natural language
+- Running and testing the application
+- Identifying unexpected behavior
+- Providing feedback for corrections
+- Refining the interface and functionality through repeated testing
 
-이 과정을 통해 아이디어를 구체적인 요구사항으로 바꾸고, AI 도구를 활용해 작동하는 애플리케이션으로 발전시키는 경험을 했습니다.
+Through this process, I gained experience in turning a personal idea into a working application using an AI coding tool.
 
-## 프로젝트 구조
+## Project Structure
 
-주요 파일과 폴더는 다음과 같습니다.
+The main project structure includes:
 
 ```text
 app/
@@ -103,54 +105,53 @@ vite.config.ts
 tsconfig.json
 ```
 
-## 실행 방법
+## Running Locally
 
-필요한 패키지를 설치합니다.
+Install the required packages:
 
 ```bash
 npm install
 ```
 
-개발 서버를 실행합니다.
+Start the development server:
 
 ```bash
 npm run dev
 ```
 
-프로젝트 환경에 따라 추가 설정이 필요할 수 있습니다.
+Additional configuration may be required depending on the local environment and deployment settings.
 
-## Git 관리
+## What I Learned
 
-GitHub에 올릴 필요가 없는 파일은 `.gitignore`를 통해 제외했습니다.
+Through this project, I gained experience with:
 
-예:
+- AI-assisted web application development
+- Converting an abstract idea into specific requirements
+- Designing a user-centered recording workflow
+- Structuring information using categories, values, notes, and tags
+- Testing generated features
+- Iteratively refining application behavior
+- Understanding the basic structure of a web project
+- Managing packages with npm
+- Managing a project with Git and GitHub
+- Debugging through repeated testing and feedback
 
-```text
-node_modules/
-dist/
-.wrangler/
-build/
-*.log
-```
+## Privacy Note
 
-## 배운 점
+This repository contains application source code only.
 
-이 프로젝트를 진행하면서 다음과 같은 경험을 했습니다.
+Personal journal entries or other private user data should not be committed to a public repository. Any environment variables, credentials, or private data files should be excluded through `.gitignore`.
 
-- AI 코딩 도구를 이용한 웹 애플리케이션 제작
-- 사용자 요구사항을 자연어로 구체화하는 과정
-- 기능을 직접 실행하고 반복적으로 검증하는 과정
-- 웹 프로젝트의 기본적인 파일 구조 확인
-- npm 기반 패키지 관리
-- Git과 GitHub를 이용한 프로젝트 관리
-- 반복적인 테스트를 통한 UI 및 기능 개선
+## Limitations
 
-## 현재 한계
+This project is a personal learning project rather than a medical or psychological assessment tool.
 
-이 프로젝트의 코드를 처음부터 직접 작성한 것은 아닙니다.
+It is intended only for personal reflection and record keeping. The displayed patterns and statistics should not be interpreted as professional mental-health evaluations.
 
-현재는 AI 도구를 활용해 원하는 기능을 구현하고 테스트하는 경험을 쌓는 단계이며, 앞으로 Linux와 프로그래밍에 대한 이해를 넓혀 프로젝트 내부 동작을 직접 이해할 수 있는 수준으로 발전하는 것을 목표로 하고 있습니다.
+The code was not written entirely from scratch, and my current focus is on learning how to understand, test, and improve AI-generated applications.
 
-## 프로젝트 목표
+## Project Goal
 
-이 프로젝트의 목표는 감정 기록이라는 개인적인 아이디어를 실제로 사용할 수 있는 애플리케이션 형태로 구현해보고, AI-assisted development를 통해 아이디어를 반복적으로 구체화하고 개선하는 경험을 쌓는 것이었습니다.
+The goal of this project was to transform a personal emotion-recording idea into a usable web application and to gain practical experience with AI-assisted development.
+
+Rather than only generating an application, I focused on defining the desired behavior, testing the result, identifying problems, and improving the application through repeated feedback.
